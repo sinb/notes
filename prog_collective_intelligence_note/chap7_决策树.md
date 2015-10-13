@@ -13,6 +13,17 @@
 ###训练,构建
 每一步计算信息增益,决定从哪拆分.
 ###显示
+两个有用的函数,计算二叉树的width和depth.
+一个分支的总宽度等于其所有字分支的宽度之和,如果节点没有子分支,即叶子节点对应的宽度为1.
+一个分支的深度等于最长子分支的总深度+1.
+```
+def getwidth(tree):
+  if tree.tb==None and tree.fb==None: return 1
+  return getwidth(tree.tb)+getwidth(tree.fb)
+def getdepth(tree):
+  if tree.tb==None and tree.fb==None: return 0
+  return max(getdepth(tree.tb),getdepth(tree.fb))+1
+```
 ###用决策树来判断新样本
 ![](images/11.png)
 就是遍历一遍,计算出所有节点上的数值.
