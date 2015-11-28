@@ -24,7 +24,18 @@ mappers输出的是中间结果(key, values)
 ##5.多个REDUCER,怎么分配工作
 ![](image/9.png)
 不知道...
-##6.
+##6.Job tracker和task tracker
 任务会提交到JOB TRACKER,JOB TRACKER会把mapper和reducer 分给task tracker.一般都会在datanode上直接执行map reduce,除非这个node太忙,就会将数据通过网络streaming到其他datanode上去算.
 Reducer会把最终结果写到HDFS上.
 ![](image/10.png)
+##7.用streaming写map reduce
+udacity教程利用的cloudera的CDH,没装这个.按照官方文档下hadoop和streaming jar,配置单机的psuedo cluster.
+
+sbin/start-dfs.sh启动hdfs
+
+之后可以跑个map reduce的例子,
+```
+hdfs dfs -put input.txt input_hdfs #把输入文件放入hdfs
+hadoop jar tools/streaming.jar -mapper /bin/cat -reducer /usr/bin/wc -input input_hdfs -output out
+hdfs dfs -get out #把结果从hdfs中提取出来.
+```
